@@ -1,0 +1,37 @@
+根据要求{stercha},从{str(df)}中选择最合适的规则,不需要多余的文字和字符修改.
+        **选择规则如下；
+        【1】段落最大设计尺寸长度不能超过6.4m,超过的需分成2段制作,沉铜段不遵守这个规则。分成多段制作的需要返回多个图块号。
+        【2】找到有效长度最合适的相应段落。()这个括号内的信息是解释信息,不考虑这个信息。
+        【3】一般只返回一条段落配置,特殊要求除外可以返回两个或多个(例如：除胶渣段需要有效长度返回多个图块)
+        【4】认真思考搜索到的数据,返回最合适的数据配置。
+        【5】水洗段需要考虑,前一个段落是什么，而且级数很重要 
+        【6】冲污水+3级水刀洗(整孔后水洗)，这个就是整孔段后的水刀洗段落
+        【7】入板段后接膨松、除胶渣等高温段落，需用SST机身，一般入板段的长度会以500多mm为准
+        【8】只考虑大类别的段落类别为:
+         DR 大类 -[DR MOD	干板组合(Drying Module）,DR BLO	强风吹干(Blow off Drying）,DR HOA	热风吹干(Hot Air Drying）,DR SHA	强热风吹干（Strong Hot Air Drying）,DR COO	冷却(Cooling)]
+         CR 大类 -[CR ACI	酸洗(Acid Rinse ),CR HCL	盐酸洗（HCL Rinse） ,CR DEG	除油(Degreasing）（喷淋结构）,CR ATA	抗氧化(Anti-Tarnish）（喷淋结构）,CR CIA	柠檬酸洗（Citric Acid Rinse）,CR ALK	碱洗（Alkali Rinse）,]
+         ET 大类 -[CR ALK	碱洗（Alkali Rinse）,ET ACN	酸性普通蚀刻(Acid Normal Etching）,ET ALN	碱性普通蚀刻(Alkali Normal Etching）,ET ACV	酸性真空蚀刻(Acid Vacuum Etching）,ET ALV	碱性真空蚀刻(Alkali Vacuum Etching）,ET SEL	补偿蚀刻(Selective Etching）,ET ATO	二流体蚀刻(Atomizing Etching)]
+         DE 大类 -[DE FIL	显影(Developing ）--干膜/湿膜结构相同（film）,DE SOM	显影(Developing ）--防焊（solder mask）]
+         ST 大类 -[ST PUF	膨松（Puffing）,ST FIL	退膜(Film Stripping ）,ST INK	除油墨/去墨/退油墨（Ink Stripping）]
+         CR 大类 -[化学水洗(Deionizing )  （喷淋结构）,CR TIS	退锡(Tin Stripping）,CR DPA	除钯(De-palladium）,CR OXR	去棕化（Oxide Removal)]
+         FR 大类 -[FR DEV	新液洗(Fresh Solution）--显影（developing）,FR ETC	新液洗(Fresh Solution）--蚀刻（etching）,FR STR	新液洗(Fresh Solution）--退膜（stripping）]
+         CR 大类 -CR AMM	氨水洗(ammonia Rinse）,CR MIE	微蚀(Micro Etching）（喷淋结构、定喷）]
+         ET 大类 -[ET MER	中粗化(medium Roughening）(带摇摆）,ET ULR	超粗化(Ultra Roughening）(带摇摆）,ET COR 	减铜(Copper Reduction)（带摇摆）]
+         CD 大类 -[CD COR 	减铜(Copper Reduction)（水刀结构）,CD OXR	棕化(Oxide Replacement）（水刀结构）,CD SWE	膨松(Sweller）,CD PER	除胶渣(Permanganate ）,CD PNE	预中和(Pre-Neutralizer）,CD NEU	中和(Neutralizer）,CD CON	整孔/调整(Conditioner）,CD PCO	预调整（Pre-Conditioner）,CD ACT	活化（Activator）,CD RED	还原（Reducer）,CD MIE	(预微蚀+)微蚀(Micro Etching)（(喷淋)+水刀结构）,CD ECO	沉铜（EL-Copper）electroless copper,CD DEG	除油(Degreasing） (水刀结构）,CD ECL	日蚀（Eclipse）,CD INI	氧化（Initiator）,CD CAT	催化(Catalyst）,CD ATA	抗氧化(Anti-Tarnish）（水刀结构）,CD BLH	黑孔(Black Hole）,CD SHA	黑影(Shadow)  ,CD FIX	定影(FIXER),CD IMT	沉锡(Immersion Tin）,CD DEI	去离子(Deionizer）  ,CD RAD	后处理RAD     , CD RPT	后处理RPT     , CD CLE	清洁（后清洁）（Clean）（水刀结构）,CD IMS	沉银（Immersion Silver）,CD PDI	后浸（Post-Dip）,CD OSP	抗氧化（OSP）,CD FLC	辘松香(Flux Coating),CR DEI	化学水洗(Deionizing )  （喷淋结构）]
+         PD 大类 -[PD ECO	预浸(Pre-Dip)--沉铜 (EL-cooper),PD OSP	预浸(Pre-Dip)--抗氧化 （OSP）,PD IMS 预浸(Pre-Dip)--沉银 （immersion silver）,PD IMT	预浸(Pre-Dip)--沉锡（immersion tin）,PD OXR	预浸(Pre-Dip)-- 棕化(Oxide Replacement）]
+         WR 大类 -[WR CAS	溢流水洗（Cascade WR/S）,WR PRE	加压水洗(Pressurized WR/S）,WR HFS	HFS水洗（HFS Rinse):heavy flow rinse,WR MEP	中压水洗（Medium Pressurized WR/S）,WR CUR	水帘（Water Curtain）,WR CON	止水洗(Concentrated WR/S） （喷淋结构）]
+         HP 大类 -[HP STE	高压水洗(High Pressurized WR/S）定喷 steady rinse,HP OSC	摇摆高压水洗( high pressure oscillation rinse),HP JET	摇摆高压水洗(Water Jet）,HP BLA	Water Blast]
+         WD 大类 -[WD FBR	水刀冲洗(Flood Bar Rinse ）,WD FBD	水刀浸洗(Flood Bar Dip),WD ULD	超声波浸洗(Ultrasonic Dip）,WD CON	止水洗(Concentrated WR/S）（水刀结构）,WD REC	回收水洗(Recyclable WR/S）]
+         SR 大类 -[SR ISS	IS研磨(IS Scrubbing),SR ISA	IS自动研磨(IS Auto Scrubbing),SR PRE	精密研磨(Precision Scrubbing),SR BEL	皮带研磨(Belt Scrubbing),SR PUM	火山灰研磨( Pumice Scrubbing,SR JEM	喷砂(Jet Master) ,SR LIG	轻擦洗板(Light Scrubbing)]
+         CO 大类 -[CO INP	入板(Input),CO OUT	出板(Output),CO INS	检查(Inspection)]
+         水洗喷淋组合大类 -[WR MWA	Multi-Water,WR HPR	Water+High Pressure,WR ULT	Water+Ultrasonic,WR UHP	Water+Ultrasonic+High Pressure,WR WAC	Water+Chemical]
+         水刀浸洗组合大类 -[WD MWA	Multi-Water,WD ULT	Water+Ultrasonic,WD WAC	Water+Chemical]
+        
+        例如规则中
+        (1)序号   图块号    图块名称    所属类别  入板方向 框架类型 机身材质  喷管要求    输送面 滚轮直径  轴距  总长度   有效长度
+         1080	CDPERL-FSSST-3186-3235-3753-C3115-001-E	3115mm有效除胶渣段	CDPER	左进右出	FS	SST	31	860mm	32	35	3753	3115mm		
+         1081	CDPERL-FSSST-3186-3235-3450-C3115-001-E	3115mm有效除胶渣段	CDPER	左进右出	FS	SST	31	860mm	32	35	3450	3115mm		
+         1076  COINPL-MSSST-2386-3235-511-001  511mmSST入板段  COINP  左进右出   MS  SST    23  860mm   32  35  511  511mm 
+        回答：(1)CDPERL-FSSST-3186-3235-3753-C3115-001-E(严格按照格式返回图块号),
+         CDPERL-FSSST-3186-3235-3450-C3115-001-E
+        没有答案回答:无
